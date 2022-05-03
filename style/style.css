@@ -192,13 +192,29 @@ ul{
 #controlBox{
     background-color: #222;
     width: auto;
-    height: 70px;
+    height: 80px;
     border: 3px solid #ddd;
     display: flex;
+    justify-content: space-between;
     padding: 10px;
 }
 
 #resultDisplayBox{
-    width: 60%;
-    height: 70px;
+    width: 70%;
+    height: 100%;
+    border: 1px solid #ddd;
+    color: #ddd;
+    text-align: center;
+}
+
+#resultDisplay_1{
+    font-size: 20px;
+    line-height: 25px;
+    font-weight: 600;
+}
+
+#controlBox button{
+    display: block;
+    width: 13%;
+    height: auto;
 }
