@@ -1,0 +1,204 @@
+@charset "utf-8";
+
+/* reset */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ul{
+    list-style: none;
+}
+
+/* #container */
+#container{
+    background-color: aquamarine;
+    width: 800px;
+    margin: 0 auto;
+    margin-top: 20px;
+    padding: 10px;
+}
+
+/* #displayBoard */
+#displayBoard{
+    width: auto;
+    height: 150px;
+    background-color: #222;
+    color: #ddd;
+    border: 3px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+#countBoard{
+    width: 16%;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 25px;
+    display: flex;
+    margin-right: 15px;
+    padding: 10px;
+}
+
+#countBoard_1{
+    margin-right: 10px;
+}
+
+#countBoard_ballCount{
+    color: green;
+}
+
+#countBoard_strikeCount{
+    color: yellow;
+}
+
+#countBoard_outCount{
+    color: red;
+}
+
+#scoreBoard{
+    width: 84%;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 20px;
+    line-height: 40px;
+    text-align: center;
+}
+
+#scoreBoard ul{
+    display: flex;
+    justify-content: space-between;
+}
+
+#scoreBoard ul li{
+    width: 8%;
+}
+
+#scoreBoard ul li:first-child{
+    width: 20%;
+    border-right: 0.5px solid #ddd;
+}
+
+#scoreBoard_inning{
+    border-bottom: 0.5px solid #ddd;
+}
+
+/* #playBoard */
+#playBoard{
+    background-color: darkgoldenrod;
+    width: auto;
+    height: 600px;
+    border: 3px solid #ddd;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+#ground{
+    background-color: rgb(0, 177, 0);
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -150px 0 0 -150px;
+    transform: rotate(45deg);
+    z-index: 1;
+}
+
+#base_base{
+    background-color: bisque;
+    width: 60px;
+    height: 60px;
+    border: 1px solid #222;
+    position: absolute;
+    top: 470px;
+    left: 50%;
+    margin-left: -30px;
+    z-index: 3;
+}
+
+#base_base_ground{
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    margin-left: -50px;
+}
+
+.base{
+    background-color: bisque;
+    width: 50px;
+    height: 50px;
+    border: 1px solid #222;
+    transform: rotate(45deg);
+    z-index: 3;
+}
+
+.base_ground{
+    background-color: darkgoldenrod;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    z-index: 2;
+}
+
+#base_1st{
+    position: absolute;
+    top: 50%;
+    margin-top: -25px;
+    right: 160px;
+}
+
+#base_1st_ground{
+    position: absolute;
+    top: 50%;
+    margin-top: -50px;
+    right: 135px;
+}
+
+#base_2nd{
+    position: absolute;
+    top: 75px;
+    left: 50%;
+    margin-left: -25px;
+}
+
+#base_2nd_ground{
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    margin-left: -50px;
+}
+
+#base_3rd{
+    position: absolute;
+    top: 50%;
+    margin-top: -25px;
+    left: 160px;
+}
+
+#base_3rd_ground{
+    position: absolute;
+    top: 50%;
+    margin-top: -50px;
+    left: 135px;
+}
+
+/* #controlBox */
+#controlBox{
+    background-color: #222;
+    width: auto;
+    height: 70px;
+    border: 3px solid #ddd;
+    display: flex;
+    padding: 10px;
+}
+
+#resultDisplayBox{
+    width: 60%;
+    height: 70px;
+}
