@@ -64,11 +64,11 @@ function turnChanger(){
 function throwing_com(){
     let rndNum = Math.floor(Math.random() * 2);
     if(rndNum == 0){
-        throwing_result = 0;
+        throwing_result = "직구";
         resultDisplay_1.innerHTML = "COMPUTER의 직구!"
         resultDisplay_2.innerHTML = "행동을 선택하세요"
     } else if(rndNum == 1){
-        throwing_result = 1;
+        throwing_result = "커브";
         resultDisplay_1.innerHTML = "COMPUTER의 커브볼!"
         resultDisplay_2.innerHTML = "행동을 선택하세요"
     }
@@ -78,12 +78,76 @@ function throwing_com(){
     button_2.addEventListener("click" , );
 }
 
+// 플레이어가 던질 공 선택
 function throwing_player(){
     button_1.innerHTML = "직구";
-    button_1.addEventListener("click" , );
+    button_1.addEventListener("click" , function(){
+        throwing_result = "직구";
+        swing_com();
+    });
     button_2.innerHTML = "커브";
-    button_2.addEventListener("click" , );
-    
+    button_2.addEventListener("click" , function(){
+        throwing_result = "커브";
+        swing_com();
+    });
+}
+
+// 컴퓨터의 스윙/흘리기 선택
+function swing_com(){
+    let rndNum = Math.floor(Math.random() * 2);
+    if(rndNum == 0){
+        resultDisplay_1.innerHTML = "COMPUTER의 스윙!"
+        resultDisplay_2.innerHTML = ""
+    } else if(rndNum == 1){
+        resultDisplay_1.innerHTML = "COMPUTER가 공을 흘립니다"
+        resultDisplay_2.innerHTML = ""
+    }
+}
+
+// 스윙시 결과
+function process_swing(){
+    let rndNum1 = Math.ceil(Math.random() * 100);
+    if(throwing_result == "직구"){
+        if(rndNum1 >= 1 && rndNum1 <= 60){
+            let rndNum2 = Math.ceil(Math.random() * 100);
+            if(rndNum2 >= 1 && rndNum2 <= 35){
+                process_out();
+            } else if(rndNum2 >= 36 && rndNum2 <= 85){
+                process_goBase();
+            } else if(rndNum2 >= 86 && rndNum2 <= 95){
+                process_goBase2();
+            } else if(rndNum2 >= 96 && rndNum2 <= 100){
+                process_homerun();
+            }
+        } else if(rndNum1 >= 61 && rndNum1 <= 100){
+            let rndNum3 = Math.ceil(Math.random() * 100);
+            if(rndNum3 >= 1 && rndNum3 <= 90){
+                process_strike();
+            } else if(rndNum3 >= 91 && rndNum3 <= 100){
+                process_ball();
+            }
+        }
+    } else if(throwing_result == "커브"){
+        if(rndNum1 >= 1 && rndNum1 <= 20){
+            let rndNum2 = Math.ceil(Math.random() * 100);
+            if(rndNum2 >= 1 && rndNum2 <= 65){
+                process_out();
+            } else if(rndNum2 >= 66 && rndNum2 <= 90){
+                process_goBase();
+            } else if(rndNum2 >= 91 && rndNum2 <= 99){
+                process_goBase2();
+            } else if(rndNum2 >= 100 && rndNum2 <= 100){
+                process_homerun();
+            }
+        } else if(rndNum1 >= 21 && rndNum1 <= 100){
+            let rndNum3 = Math.ceil(Math.random() * 100);
+            if(rndNum3 >= 1 && rndNum3 <= 20){
+                process_strike();
+            } else if(rndNum3 >= 21 && rndNum3 <= 100){
+                process_ball();
+            }
+        }
+    }
 }
 
 // 각종 결과를 화면에 출력하는 함수
