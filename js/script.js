@@ -22,6 +22,8 @@ button_1.addEventListener("click" , gameStarter);
 // 게임 시작시 초기세팅
 function gameStarter(){
     button_1.removeEventListener("click" , gameStarter);
+    button_1.disabled = true;
+    button_2.disabled = true;
     resultDisplay_1.innerHTML = "게임을 시작합니다!";
     resultDisplay_2.innerHTML = "잠깐만 기다려주세요.";
 
@@ -47,16 +49,15 @@ function gameReseter(){
 // 공/수 전환시 세팅
 function turnChanger(){
     if(isTurn == "com"){
-        isTurn = "player"
-        resultDisplay_1.innerHTML = count_turn + "회 말"
-        resultDisplay_2.innerHTML = "PLAYER의 공격입니다."
-        setTimeout(function(){
-            throwing_com();
-        } , 2000)
+        isTurn = "player";
+        resultDisplay_1.innerHTML = count_turn + "회 말";
+        resultDisplay_2.innerHTML = "PLAYER의 공격입니다.";
+        setTimeout(throwing_com , 2000);
     } else if(isTurn == "player"){
-        isTurn = "com"
-        resultDisplay_1.innerHTML = count_turn + "회 초"
-        resultDisplay_2.innerHTML = "COMPUTER의 공격입니다."
+        isTurn = "com";
+        resultDisplay_1.innerHTML = count_turn + "회 초";
+        resultDisplay_2.innerHTML = "COMPUTER의 공격입니다.";
+        setTimeout(throwing_player , 2000);
     }
 }
 
@@ -65,12 +66,12 @@ function throwing_com(){
     let rndNum = Math.floor(Math.random() * 2);
     if(rndNum == 0){
         throwing_result = "직구";
-        resultDisplay_1.innerHTML = "COMPUTER의 직구!"
-        resultDisplay_2.innerHTML = "행동을 선택하세요"
+        resultDisplay_1.innerHTML = "COMPUTER의 직구!";
+        resultDisplay_2.innerHTML = "행동을 선택하세요";
     } else if(rndNum == 1){
         throwing_result = "커브";
-        resultDisplay_1.innerHTML = "COMPUTER의 커브볼!"
-        resultDisplay_2.innerHTML = "행동을 선택하세요"
+        resultDisplay_1.innerHTML = "COMPUTER의 커브볼!";
+        resultDisplay_2.innerHTML = "행동을 선택하세요";
     }
     button_1.innerHTML = "스윙";
     button_1.addEventListener("click" , );
@@ -80,15 +81,26 @@ function throwing_com(){
 
 // 플레이어가 던질 공 선택
 function throwing_player(){
+    button_1.disabled = false;
+    button_2.disabled = false;
+    resultDisplay_2.innerHTML = "행동을 선택하세요";
     button_1.innerHTML = "직구";
     button_1.addEventListener("click" , function(){
+        resultDisplay_1.innerHTML = "Player의 직구!"
+        resultDisplay_2.innerHTML = "COMPUTER가 행동을 결정하고있습니다."
         throwing_result = "직구";
-        swing_com();
+        button_1.disabled = true;
+        button_2.disabled = true;
+        setTimeout(swing_com , 2000);
     });
     button_2.innerHTML = "커브";
     button_2.addEventListener("click" , function(){
+        resultDisplay_1.innerHTML = "Player의 커브!"
+        resultDisplay_2.innerHTML = "COMPUTER가 행동을 결정하고있습니다."
         throwing_result = "커브";
-        swing_com();
+        button_1.disabled = true;
+        button_2.disabled = true;
+        setTimeout(swing_com , 2000);
     });
 }
 
@@ -97,11 +109,13 @@ function swing_com(){
     let rndNum = Math.floor(Math.random() * 2);
     if(rndNum == 0){
         resultDisplay_1.innerHTML = "COMPUTER의 스윙!"
-        resultDisplay_2.innerHTML = ""
+        resultDisplay_2.innerHTML = "..."
+        setTimeout(process_swing , 2000);
     } else if(rndNum == 1){
         resultDisplay_1.innerHTML = "COMPUTER가 공을 흘립니다"
-        resultDisplay_2.innerHTML = ""
+        resultDisplay_2.innerHTML = "..."
     }
+
 }
 
 // 스윙시 결과
@@ -111,42 +125,74 @@ function process_swing(){
         if(rndNum1 >= 1 && rndNum1 <= 60){
             let rndNum2 = Math.ceil(Math.random() * 100);
             if(rndNum2 >= 1 && rndNum2 <= 35){
-                process_out();
+                resultDisplay_2.innerHTML = "플라이 아웃입니다.";
+                setTimeout(process_out , 2000);
             } else if(rndNum2 >= 36 && rndNum2 <= 85){
-                process_goBase();
+                resultDisplay_2.innerHTML = "안타입니다!";
+                setTimeout(process_goBase , 2000);
             } else if(rndNum2 >= 86 && rndNum2 <= 95){
-                process_goBase2();
+                resultDisplay_2.innerHTML = "2루타입니다!";
+                setTimeout(process_goBase2 , 2000);
             } else if(rndNum2 >= 96 && rndNum2 <= 100){
-                process_homerun();
+                resultDisplay_2.innerHTML = "홈런! 홈런입니다!";
+                setTimeout(process_homerun , 2000);
             }
         } else if(rndNum1 >= 61 && rndNum1 <= 100){
-            let rndNum3 = Math.ceil(Math.random() * 100);
-            if(rndNum3 >= 1 && rndNum3 <= 90){
-                process_strike();
-            } else if(rndNum3 >= 91 && rndNum3 <= 100){
-                process_ball();
-            }
+            resultDisplay_2.innerHTML = "헛스윙! 스트라이크입니다.";
+            setTimeout(process_strike , 2000);
         }
     } else if(throwing_result == "커브"){
         if(rndNum1 >= 1 && rndNum1 <= 20){
             let rndNum2 = Math.ceil(Math.random() * 100);
             if(rndNum2 >= 1 && rndNum2 <= 65){
-                process_out();
+                resultDisplay_2.innerHTML = "플라이 아웃입니다.";
+                setTimeout(process_out , 2000);
             } else if(rndNum2 >= 66 && rndNum2 <= 90){
-                process_goBase();
+                resultDisplay_2.innerHTML = "안타입니다!";
+                setTimeout(process_goBase , 2000);
             } else if(rndNum2 >= 91 && rndNum2 <= 99){
-                process_goBase2();
+                resultDisplay_2.innerHTML = "2루타입니다.";
+                setTimeout(process_goBase2 , 2000);
             } else if(rndNum2 >= 100 && rndNum2 <= 100){
-                process_homerun();
+                resultDisplay_2.innerHTML = "홈런! 홈런입니다!";
+                setTimeout(process_homerun , 2000);
             }
         } else if(rndNum1 >= 21 && rndNum1 <= 100){
-            let rndNum3 = Math.ceil(Math.random() * 100);
-            if(rndNum3 >= 1 && rndNum3 <= 20){
-                process_strike();
-            } else if(rndNum3 >= 21 && rndNum3 <= 100){
-                process_ball();
-            }
+            resultDisplay_2.innerHTML = "헛스윙! 스트라이크입니다.";
+            setTimeout(process_strike , 2000);
         }
+    }
+}
+
+// 흘리기 결과
+function process_noSwing(){
+    let rndNum = Math.ceil(Math.random() * 10);
+    if(throwing_result == "직구"){
+        if(rndNum >= 1 && rndNum <= 9){
+            resultDisplay_2.innerHTML = "스트라이크!";
+            setTimeout(process_strike , 2000);
+        } else if(rndNum == 10){
+            resultDisplay_2.innerHTML = "볼!";
+            setTimeout(process_ball , 2000);
+        }
+    } else if(throwing_result == "커브"){
+        if(rndNum >= 1 && rndNum <= 2){
+            resultDisplay_2.innerHTML = "스트라이크!";
+            setTimeout(process_strike , 2000);
+        } else if(rndNum >= 3 && rndNum <= 10){
+            resultDisplay_2.innerHTML = "볼!";
+            setTimeout(process_ball , 2000);
+        }
+    }
+}
+
+function process_out(){
+    count_out++;
+    if(count_out == 1 || count_out == 2){
+
+    } else if(count_out == 3){
+
+        setTimeout(turnChanger , 2000);
     }
 }
 
@@ -200,13 +246,13 @@ function resultDisplayPrinter(){
             scoreBoard_comScore.children[i].innerHTML = comScore[i - 1];
             sum_comScore += comScore[i - 1];
         }
-        scoreBoard_comScore.children[10].innerHTML - sum_comScore;
+        scoreBoard_comScore.children[10].innerHTML = sum_comScore;
     } else if(isTurn == "player"){
         for(i = 1; i <= count_turn; i++){
             scoreBoard_playerScore.children[i].innerHTML = playerScore[i - 1];
             sum_plyaerScore += plyaerScore[i - 1];
         }
-        scoreBoard_playerScore.children[10].innerHTML - sum_playerScore;
+        scoreBoard_playerScore.children[10].innerHTML = sum_playerScore;
     }
 
     // 주자 표시
