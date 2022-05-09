@@ -37,7 +37,7 @@ function gameStarter(){
 // 게임 데이터 초기화
 function gameReseter(){
     isTurn = "player";
-    count_turn = 1;
+    count_turn = 0;
     count_strike = 0;
     count_ball = 0;
     count_out = 0;
