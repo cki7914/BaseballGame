@@ -1,11 +1,11 @@
 let isTurn , throwing_result;
-let count_turn = 1;
+let count_turn = 0;
 let count_strike = 0;
 let count_ball = 0;
 let count_out = 0;
 let comScore = [0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0];
 let playerScore = [0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0];
-let bases = [0 , 0 , 0];
+let bases = [0 , 0 , 0 , 0];
 
 let button_1 = document.querySelector("#button_1");
 let button_2 = document.querySelector("#button_2");
@@ -43,7 +43,7 @@ function gameReseter(){
     count_out = 0;
     comScore = [0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0];
     playerScore = [0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0];
-    bases = [0 , 0 , 0];
+    bases = [0 , 0 , 0 , 0];
 }
 
 // 공/수 전환시 세팅
@@ -54,6 +54,7 @@ function turnChanger(){
         resultDisplay_2.innerHTML = "PLAYER의 공격입니다.";
         setTimeout(throwing_com , 2000);
     } else if(isTurn == "player"){
+        count_turn++;
         isTurn = "com";
         resultDisplay_1.innerHTML = count_turn + "회 초";
         resultDisplay_2.innerHTML = "COMPUTER의 공격입니다.";
@@ -61,7 +62,7 @@ function turnChanger(){
     }
 }
 
-// 컴퓨터가 던진 공을 결정
+// 컴퓨터가 던질 공을 결정
 function throwing_com(){
     let rndNum = Math.floor(Math.random() * 2);
     if(rndNum == 0){
@@ -186,13 +187,69 @@ function process_noSwing(){
     }
 }
 
+// 아웃 처리
 function process_out(){
     count_out++;
-    if(count_out == 1 || count_out == 2){
+    if(count_out == 3){
+        count_strike = 0;
+        count_ball = 0;
+        count_out = 0;
+        setTimeout(function(){
+            resultDisplayPrinter;
+            turnChanger;
+        } , 2000);
+        return;
+    }
+    resultDisplayPrinter();
+    if(isTurn = "com"){
+        setTimeout(throwing_player , 2000);
+    } else if(isTurn = "player"){
+        setTimeout(throwing_com , 2000);
+    }
+}
 
-    } else if(count_out == 3){
+// 안타(진루) 처리
+function process_goBase(){
+    for(i = 0; i < bases.length; i++){
+        if(bases[i] == 0){
+            bases[i] = 1;
+        }
+    }
+    if(bases[4] = 1){
+        if(isTurn = "com"){
+            comScore[count_turn]++;
+        } else if(isTurn = "player"){
+            playerScore[count_turn]++;
+        }
+        bases[4] = 0;
+    }
 
-        setTimeout(turnChanger , 2000);
+    resultDisplayPrinter();
+    if(isTurn = "com"){
+        setTimeout(throwing_player , 2000);
+    } else if(isTurn = "player"){
+        setTimeout(throwing_com , 2000);
+    }
+}
+
+// 아웃 처리
+function process_out(){
+    count_out++;
+    if(count_out == 3){
+        count_strike = 0;
+        count_ball = 0;
+        count_out = 0;
+        setTimeout(function(){
+            resultDisplayPrinter;
+            turnChanger;
+        } , 2000);
+        return;
+    }
+    resultDisplayPrinter();
+    if(isTurn = "com"){
+        setTimeout(throwing_player , 2000);
+    } else if(isTurn = "player"){
+        setTimeout(throwing_com , 2000);
     }
 }
 
