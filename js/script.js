@@ -84,16 +84,10 @@ function throwing_com(){
 function throwing_player(){
     button_1.disabled = false;
     button_2.disabled = false;
+    resultDisplay_1.innerHTML = "COMPUTER의 공격입니다."
     resultDisplay_2.innerHTML = "행동을 선택하세요";
     button_1.innerHTML = "직구";
-    button_1.addEventListener("click" , function(){
-        resultDisplay_1.innerHTML = "Player의 직구!"
-        resultDisplay_2.innerHTML = "COMPUTER가 행동을 결정하고있습니다."
-        throwing_result = "직구";
-        button_1.disabled = true;
-        button_2.disabled = true;
-        setTimeout(swing_com , 2000);
-    });
+    button_1.addEventListener("click" , throwing_str);
     button_2.innerHTML = "커브";
     button_2.addEventListener("click" , function(){
         resultDisplay_1.innerHTML = "Player의 커브!"
@@ -103,6 +97,23 @@ function throwing_player(){
         button_2.disabled = true;
         setTimeout(swing_com , 2000);
     });
+}
+
+// 직구 선택시
+function throwing_str(){
+    resultDisplay_1.innerHTML = "Player의 직구!"
+    resultDisplay_2.innerHTML = "COMPUTER가 행동을 결정하고있습니다."
+    throwing_result = "직구";
+    button_1.disabled = true;
+    button_1.removeEventListener("click" , throwing_str);
+    button_2.disabled = true;
+    // button_2.removeEventListener("click" , function a(){});
+    setTimeout(swing_com , 2000);
+}
+
+// 커브 선택시
+function throwing_cur(){
+    
 }
 
 // 컴퓨터의 스윙/흘리기 선택
@@ -115,6 +126,7 @@ function swing_com(){
     } else if(rndNum == 1){
         resultDisplay_1.innerHTML = "COMPUTER가 공을 흘립니다"
         resultDisplay_2.innerHTML = "..."
+        setTimeout(process_noSwing , 2000);
     }
 
 }
@@ -213,15 +225,96 @@ function process_goBase(){
     for(i = 0; i < bases.length; i++){
         if(bases[i] == 0){
             bases[i] = 1;
+            break;
         }
     }
     if(bases[4] = 1){
         if(isTurn = "com"){
-            comScore[count_turn]++;
+            comScore[count_turn - 1]++;
         } else if(isTurn = "player"){
-            playerScore[count_turn]++;
+            playerScore[count_turn - 1]++;
         }
         bases[4] = 0;
+    }
+    count_ball = 0;
+    count_strike = 0;
+
+    resultDisplayPrinter();
+    if(isTurn = "com"){
+        setTimeout(throwing_player , 2000);
+    } else if(isTurn = "player"){
+        setTimeout(throwing_com , 2000);
+    }
+}
+
+// 2루타 처리
+function process_goBase2(){
+    for(i = 0; i < 2; i++){
+        for(j = 0; j < bases.length; j++){
+            if(bases[j] == 0){
+                bases[j] = 1;
+                break;
+            }
+        }
+        if(bases[4] = 1){
+            if(isTurn = "com"){
+                comScore[count_turn - 1]++;
+            } else if(isTurn = "player"){
+                playerScore[count_turn - 1]++;
+            }
+            bases[4] = 0;
+        }
+    }
+    count_ball = 0;
+    count_strike = 0;
+    bases[0] = 0;
+
+    resultDisplayPrinter();
+    if(isTurn = "com"){
+        setTimeout(throwing_player , 2000);
+    } else if(isTurn = "player"){
+        setTimeout(throwing_com , 2000);
+    }
+}
+
+// 홈런 처리
+function process_homerun(){
+    let count_homerun = 0;
+    for(i = 0; i < bases.length; i++){
+        if(bases[i] == 1){
+            count_homerun++;
+            bases[i] = 0;
+        }
+    }
+    if(isTurn = "com"){
+        comScore[count_turn - 1] + count_homerun + 1;
+    } else if(isTurn = "player"){
+        playerScore[count_turn - 1] + count_homerun + 1;
+    }
+    count_homerun = 0;
+    count_ball = 0;
+    count_strike = 0;
+
+    resultDisplayPrinter();
+    if(isTurn = "com"){
+        setTimeout(throwing_player , 2000);
+    } else if(isTurn = "player"){
+        setTimeout(throwing_com , 2000);
+    }
+}
+
+// 스트라이크 처리
+function process_strike(){
+    count_strike++;
+    if(count_strike == 3){
+        if(isTurn == "com"){
+            resultDisplay_2.innerHTML = "COMPUTER의 삼진아웃!";
+            setTimeout(process_out , 2000);
+        } else if(isTurn == "player"){
+            resultDisplay_2.innerHTML = "PLAYER의 삼진아웃!";
+            setTimeout(process_out , 2000);
+        }
+        return;
     }
 
     resultDisplayPrinter();
@@ -232,19 +325,20 @@ function process_goBase(){
     }
 }
 
-// 아웃 처리
-function process_out(){
-    count_out++;
-    if(count_out == 3){
-        count_strike = 0;
-        count_ball = 0;
-        count_out = 0;
-        setTimeout(function(){
-            resultDisplayPrinter;
-            turnChanger;
-        } , 2000);
+// 볼 처리
+function process_ball(){
+    count_ball++;
+    if(count_ball == 4){
+        if(isTurn == "com"){
+            resultDisplay_2.innerHTML = "COMPUTER의 포볼!";
+            setTimeout(process_goBase , 2000);
+        } else if(isTurn == "player"){
+            resultDisplay_2.innerHTML = "PLAYER의 포볼!";
+            setTimeout(process_goBase , 2000);
+        }
         return;
     }
+
     resultDisplayPrinter();
     if(isTurn = "com"){
         setTimeout(throwing_player , 2000);
@@ -313,7 +407,7 @@ function resultDisplayPrinter(){
     }
 
     // 주자 표시
-    for(i = 0; i < bases.length; i++){
+    for(i = 0; i <= 2; i++){
         if(bases[i] == 0){
             document.querySelectorAll(".base")[i].style.backgroundColor = "bisque";
         } else if(bases[i] == 1){
