@@ -89,14 +89,7 @@ function throwing_player(){
     button_1.innerHTML = "직구";
     button_1.addEventListener("click" , throwing_str);
     button_2.innerHTML = "커브";
-    button_2.addEventListener("click" , function(){
-        resultDisplay_1.innerHTML = "Player의 커브!"
-        resultDisplay_2.innerHTML = "COMPUTER가 행동을 결정하고있습니다."
-        throwing_result = "커브";
-        button_1.disabled = true;
-        button_2.disabled = true;
-        setTimeout(swing_com , 2000);
-    });
+    button_2.addEventListener("click" , throwing_cur);
 }
 
 // 직구 선택시
@@ -107,13 +100,20 @@ function throwing_str(){
     button_1.disabled = true;
     button_1.removeEventListener("click" , throwing_str);
     button_2.disabled = true;
-    // button_2.removeEventListener("click" , function a(){});
+    button_2.removeEventListener("click" , throwing_cur);
     setTimeout(swing_com , 2000);
 }
 
 // 커브 선택시
 function throwing_cur(){
-    
+    resultDisplay_1.innerHTML = "Player의 커브!"
+    resultDisplay_2.innerHTML = "COMPUTER가 행동을 결정하고있습니다."
+    throwing_result = "커브";
+    button_1.disabled = true;
+    button_1.removeEventListener("click" , throwing_str);
+    button_2.disabled = true;
+    button_2.removeEventListener("click" , throwing_cur);
+    setTimeout(swing_com , 2000);
 }
 
 // 컴퓨터의 스윙/흘리기 선택
