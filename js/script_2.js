@@ -12,6 +12,7 @@ let button_1 = document.querySelector("#button_1");
 let button_2 = document.querySelector("#button_2");
 let resultDisplay_1 = document.querySelector("#resultDisplay_1");
 let resultDisplay_2 = document.querySelector("#resultDisplay_2");
+let logDisplay = document.querySelector("#logDisplay_buttom");
 
 button_1.addEventListener("click" , gameStarter);
 
@@ -33,6 +34,8 @@ function gameStarter(){
 
     resultDisplay_1.innerHTML = "게임을 시작합니다!";
     resultDisplay_2.innerHTML = "잠시만 기다려주세요.";
+
+    processer_log("게임을 시작합니다!");
 
     setTimeout(function(){
         resultPrinter();
@@ -456,6 +459,16 @@ function processer_ball(){
 
         processer_goBase();
     }
+}
+
+//로그 남기기
+function processer_log(a){
+    // let newText = document.createTextNode;
+    // newText.value = a;
+    let newP = document.createElement("p");
+    newP.innerHTML = a;
+    // newP.appendChild(newText);
+    logDisplay.appendChild(newP);
 }
 
 // 현재 상황 출력

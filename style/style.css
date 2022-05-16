@@ -13,11 +13,16 @@ ul{
 
 /* #container */
 #container{
-    background-color: aquamarine;
-    width: 800px;
+    width: 1200px;
     margin: 0 auto;
     margin-top: 20px;
     padding: 10px;
+    display: flex;
+}
+
+/* #leftDisplay */
+#leftDisplay{
+    width: 800px;
 }
 
 /* #displayBoard */
@@ -217,4 +222,45 @@ ul{
     display: block;
     width: 13%;
     height: auto;
+}
+
+/* #rightDisplay */
+#rightDisplay{
+    background-color: #222;
+    color: #ddd;
+    width: 400px;
+    border: #ddd 1px solid;
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    padding: 10px;
+}
+
+/* #logDisplay_top */
+#logDisplay_top{
+    width: auto;
+    height: 80px;
+    text-align: center;
+    font-size: 30px;
+    line-height: 80px;
+    border: #ddd 1px solid;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+/* #logDisplay_buttom */
+#logDisplay_buttom{
+    width: auto;
+    height: 100%;
+    /* overflow-y: scroll; */
+    font-size: 20px;
+    line-height: 20px;
+    border: #ddd 1px solid;
+    border-radius: 5px;
+}
+
+#logDisplay_buttom p{
+    display: inline;
+    padding: 10px;
+    line-height: 40px;
 }

@@ -9,82 +9,94 @@
 </head>
 <body>
     <div id="container">
-        <div id="displayBoard">
-            <div id="countBoard">
-                <div id="countBoard_1">
-                    <p>B</p>
-                    <p>S</p>
-                    <p>O</p>
-                </div>
-                <div id="countBoard_2">
-                    <p id="countBoard_ballCount">○○○</p>
-                    <p id="countBoard_strikeCount">○○</p>
-                    <p id="countBoard_outCount">○○</p>
-                </div>
-            </div><!--#countBoard-->
-            <div id="scoreBoard">
-                <ul id="scoreBoard_inning">
-                    <li>Inning</li>
-                    <li>1</li>
-                    <li>2</li>
-                    <li>3</li>
-                    <li>4</li>
-                    <li>5</li>
-                    <li>6</li>
-                    <li>7</li>
-                    <li>8</li>
-                    <li>9</li>
-                    <li>총점</li>
-                </ul>
-                <ul id="scoreBoard_comScore">
-                    <li>COMPUTER</li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                </ul>
-                <ul id="scoreBoard_playerScore">
-                    <li>PLAYER</li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                </ul>
-            </div><!--#scoreBoard-->
-        </div><!--#displayBoard-->
+        <div id="leftDisplay">
+            <div id="displayBoard">
+                <div id="countBoard">
+                    <div id="countBoard_1">
+                        <p>B</p>
+                        <p>S</p>
+                        <p>O</p>
+                    </div>
+                    <div id="countBoard_2">
+                        <p id="countBoard_ballCount">○○○</p>
+                        <p id="countBoard_strikeCount">○○</p>
+                        <p id="countBoard_outCount">○○</p>
+                    </div>
+                </div><!--#countBoard-->
+                <div id="scoreBoard">
+                    <ul id="scoreBoard_inning">
+                        <li>Inning</li>
+                        <li>1</li>
+                        <li>2</li>
+                        <li>3</li>
+                        <li>4</li>
+                        <li>5</li>
+                        <li>6</li>
+                        <li>7</li>
+                        <li>8</li>
+                        <li>9</li>
+                        <li>총점</li>
+                    </ul>
+                    <ul id="scoreBoard_comScore">
+                        <li>COMPUTER</li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                    <ul id="scoreBoard_playerScore">
+                        <li>PLAYER</li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </div><!--#scoreBoard-->
+            </div><!--#displayBoard-->
 
-        <div id="playBoard">
-            <div id="ground"></div>
-            <div id="base_base"></div>
-            <div id="base_base_ground" class="base_ground"></div>
-            <div id="base_1st" class="base"></div>
-            <div id="base_1st_ground" class="base_ground"></div>
-            <div id="base_2nd" class="base"></div>
-            <div id="base_2nd_ground" class="base_ground"></div>
-            <div id="base_3rd" class="base"></div>
-            <div id="base_3rd_ground" class="base_ground"></div>
-        </div><!--#playBoard-->
+            <div id="playBoard">
+                <div id="ground"></div>
+                <div id="base_base"></div>
+                <div id="base_base_ground" class="base_ground"></div>
+                <div id="base_1st" class="base"></div>
+                <div id="base_1st_ground" class="base_ground"></div>
+                <div id="base_2nd" class="base"></div>
+                <div id="base_2nd_ground" class="base_ground"></div>
+                <div id="base_3rd" class="base"></div>
+                <div id="base_3rd_ground" class="base_ground"></div>
+            </div><!--#playBoard-->
 
-        <div id="controlBox">
-            <div id="resultDisplayBox">
-                <p id="resultDisplay_1">cki7914's Baseball Game</p>
-                <p id="resultDisplay_2">반갑습니다!</p>
+            <div id="controlBox">
+                <div id="resultDisplayBox">
+                    <p id="resultDisplay_1">cki7914's Baseball Game</p>
+                    <p id="resultDisplay_2">반갑습니다!</p>
+                </div>
+                <button type="button" id="button_1">게임 시작</button>
+                <button type="button" id="button_2">초기화</button>
+            </div><!--#controlBox-->
+        </div><!--#leftDisplay-->
+
+        <div id="rightDisplay">
+            <div id="logDisplay_top">
+                <p>로그</p>
             </div>
-            <button type="button" id="button_1">게임 시작</button>
-            <button type="button" id="button_2">초기화</button>
-        </div><!--#controlBox-->
+
+            <div id="logDisplay_buttom">
+
+            </div>
+        </div><!--#rightDisplay-->
     </div><!--#container-->
 
     <script src="./js/script_2.js"></script>
