@@ -55,12 +55,16 @@ function turnChanger(){
 
         resultDisplay_1.innerHTML = count_turn + "회 말";
         resultDisplay_2.innerHTML = ""
+
+        processer_log(count_turn + "회 말");
     } else if(nowTurn == "player"){
         nowTurn = "computer";
         count_turn++;
 
         resultDisplay_1.innerHTML = count_turn + "회 초";
         resultDisplay_2.innerHTML = ""
+
+        processer_log(count_Turn + "회 초");
     }
 
     if(count_turn < 10){
@@ -95,6 +99,9 @@ function processer_game(){
         resultDisplay_1.innerHTML = "COMPUTER의 공격입니다.";
         resultDisplay_2.innerHTML = "행동을 선택하세요.";
 
+        processer_log("COMPUTER의 공격입니다.");
+        processer_log("행동을 선택하세요.");
+
         button_1.innerHTML = "직구";
         button_1.addEventListener("click" , result_throw_fastball);
 
@@ -104,6 +111,9 @@ function processer_game(){
     if(nowTurn == "player"){
         resultDisplay_1.innerHTML = "PLAYER의 공격입니다.";
         resultDisplay_2.innerHTML = "COMPUTER가 행동을 결정하는 중입니다.";
+
+        processer_log("PLAYER의 공격입니다.");
+        processer_log("행동을 선택하세요.");
 
         button_1.innerHTML = "스윙";
         button_1.addEventListener("click" , result_swing_swing);
@@ -463,11 +473,8 @@ function processer_ball(){
 
 //로그 남기기
 function processer_log(a){
-    // let newText = document.createTextNode;
-    // newText.value = a;
     let newP = document.createElement("p");
     newP.innerHTML = a;
-    // newP.appendChild(newText);
     logDisplay.appendChild(newP);
 }
 
