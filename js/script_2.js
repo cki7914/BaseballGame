@@ -7,6 +7,7 @@ let count_turn = 1;
 let score_computer = [0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0];
 let score_player = [0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0];
 let bases = [0 , 0 , 0 , 0];
+let count_log = 1;
 
 let button_1 = document.querySelector("#button_1");
 let button_2 = document.querySelector("#button_2");
@@ -26,6 +27,7 @@ function gameStarter(){
     score_computer = [0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0];
     score_player = [0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0];
     bases = [0 , 0 , 0 , 0];
+    count_log = 1;
 
     button_1.removeEventListener("click" , gameStarter);
 
@@ -64,7 +66,7 @@ function turnChanger(){
         resultDisplay_1.innerHTML = count_turn + "회 초";
         resultDisplay_2.innerHTML = ""
 
-        processer_log(count_Turn + "회 초");
+        processer_log(count_turn + "회 초");
     }
 
     if(count_turn < 10){
@@ -113,13 +115,16 @@ function processer_game(){
         resultDisplay_2.innerHTML = "COMPUTER가 행동을 결정하는 중입니다.";
 
         processer_log("PLAYER의 공격입니다.");
-        processer_log("행동을 선택하세요.");
 
-        button_1.innerHTML = "스윙";
-        button_1.addEventListener("click" , result_swing_swing);
+        setTimeout(function(){
+            computerSelect_throw();
 
-        button_2.innerHTML = "흘리기";
-        button_2.addEventListener("click" , result_swing_noswing);
+            button_1.innerHTML = "스윙";
+            button_1.addEventListener("click" , result_swing_swing);
+    
+            button_2.innerHTML = "흘리기";
+            button_2.addEventListener("click" , result_swing_noswing);
+        } , 2000)
     }
 }
 
@@ -127,6 +132,8 @@ function processer_game(){
 function result_throw_fastball(){
     resultDisplay_1.innerHTML = "PLAYER의 직구!";
     resultDisplay_2.innerHTML = "COMPUTER가 행동을 선택하고있습니다.";
+
+    processer_log("PLAYER의 직구!");
 
     result_throw = "fastball";
 
@@ -143,6 +150,8 @@ function result_throw_fastball(){
 function result_throw_curve(){
     resultDisplay_1.innerHTML = "PLAYER의 커브!";
     resultDisplay_2.innerHTML = "COMPUTER가 행동을 선택하고있습니다.";
+
+    processer_log("PLAYER의 커브!");
 
     result_throw = "curve";
 
@@ -165,7 +174,7 @@ function result_swing_swing(){
     button_1.removeEventListener("click" , result_swing_swing);
     button_2.removeEventListener("click" , result_swing_noswing);
 
-    setTimeout(processer_swing() , 2000);
+    setTimeout(processer_swing , 2000);
 }
 
 // 플레이어가 흘리기 선택시
@@ -178,7 +187,7 @@ function result_swing_noswing(){
     button_1.removeEventListener("click" , result_swing_swing);
     button_2.removeEventListener("click" , result_swing_noswing);
 
-    setTimeout(processer_swing() , 2000);
+    setTimeout(processer_swing , 2000);
 }
 
 // 컴퓨터의 스윙/흘리기 결정
@@ -190,11 +199,15 @@ function computerSelect_swing(){
             resultDisplay_1.innerHTML = "COMPUTER의 스윙!";
             resultDisplay_2.innerHTML = "...";
 
+            processer_log("COMPUTER의 스윙!")
+
             setTimeout(processer_swing , 2000);
         }
         if(rndNum >= 81){
             resultDisplay_1.innerHTML = "COMPUTER가 공을 흘립니다.";
             resultDisplay_2.innerHTML = "...";
+
+            processer_log("COMPUTER가 공을 흘립니다.");
 
             setTimeout(processer_noswing , 2000);
         }
@@ -204,14 +217,40 @@ function computerSelect_swing(){
             resultDisplay_1.innerHTML = "COMPUTER의 스윙!";
             resultDisplay_2.innerHTML = "...";
 
+            processer_log("COMPUTER의 스윙!")
+
             setTimeout(processer_swing , 2000);
         }
         if(rndNum >= 31){
             resultDisplay_1.innerHTML = "COMPUTER가 공을 흘립니다.";
             resultDisplay_2.innerHTML = "...";
 
+            processer_log("COMPUTER가 공을 흘립니다.");
+
             setTimeout(processer_noswing , 2000);
         }
+    }
+}
+
+// 컴퓨터의 직구/커브 결정
+function computerSelect_throw(){
+    let rndNum = Math.ceil(Math.random() * 100);
+
+    if(rndNum <= 50){
+        resultDisplay_1.innerHTML = "COMPUTER의 직구!";
+        resultDisplay_2.innerHTML = "행동을 선택하세요.";
+
+        processer_log("COMPUTER의 직구!");
+
+        result_throw = "fastball";
+    }
+    if(rndNum >= 51){
+        resultDisplay_1.innerHTML = "COMPUTER의 커브!";
+        resultDisplay_2.innerHTML = "행동을 선택하세요.";
+
+        processer_log("COMPUTER의 커브!");
+
+        result_throw = "curve";
     }
 }
 
@@ -225,23 +264,33 @@ function processer_swing(){
             if(rndNum_2 <= 35){
                 resultDisplay_2.innerHTML = "플라이 아웃!";
 
+                processer_log("플라이 아웃!");
+
                 setTimeout(processer_out() , 2000);
             } else if(rndNum_2 <= 85){
                 resultDisplay_2.innerHTML = "안타!";
+
+                processer_log("안타!");
 
                 setTimeout(processer_goBase() , 2000);
             } else if(rndNum_2 <= 95){
                 resultDisplay_2.innerHTML = "2루타!";
 
+                processer_log("2루타!");
+
                 setTimeout(processer_goBase2() , 2000);
             } else if(rndNum_2 <= 100){
                 resultDisplay_2.innerHTML = "홈런! 홈런입니다!";
+
+                processer_log("홈런!");
 
                 setTimeout(processer_homerun() , 2000);
             }
         }
         if(rndNum_1 >= 61){
             resultDisplay_2.innerHTML = "스트라이크!";
+
+            processer_log("스트라이크!");
 
             setTimeout(processer_strike() , 2000);
         }
@@ -252,23 +301,33 @@ function processer_swing(){
             if(rndNum_2 <= 65){
                 resultDisplay_2.innerHTML = "플라이 아웃!";
 
+                processer_log("플라이 아웃!");
+
                 setTimeout(processer_out() , 2000);
             } else if(rndNum_2 <= 90){
                 resultDisplay_2.innerHTML = "안타!";
+
+                processer_log("안타!");
 
                 setTimeout(processer_goBase() , 2000);
             } else if(rndNum_2 <= 99){
                 resultDisplay_2.innerHTML = "2루타!";
 
+                processer_log("2루타!");
+
                 setTimeout(processer_goBase2() , 2000);
             } else if(rndNum_2 <= 100){
                 resultDisplay_2.innerHTML = "홈런! 홈런입니다!";
+
+                processer_log("홈런!");
 
                 setTimeout(processer_homerun() , 2000);
             }
         }
         if(rndNum_1 >= 21){
             resultDisplay_2.innerHTML = "스트라이크!";
+
+            processer_log("스트라이크!");
 
             setTimeout(processer_strike() , 2000);
         }
@@ -283,10 +342,14 @@ function processer_noswing(){
         if(rndNum <= 90){
             resultDisplay_2.innerHTML = "스트라이크!";
 
+            processer_log("스트라이크!");
+
             setTimeout(processer_strike() , 2000);
         }
         if(rndNum >= 91){
             resultDisplay_2.innerHTML = "볼!";
+
+            processer_log("볼!");
 
             setTimeout(processer_ball() , 2000);
         }
@@ -295,10 +358,14 @@ function processer_noswing(){
         if(rndNum <= 20){
             resultDisplay_2.innerHTML = "스트라이크!";
 
+            processer_log("스트라이크!");
+
             setTimeout(processer_strike() , 2000);
         }
         if(rndNum >= 21){
             resultDisplay_2.innerHTML = "볼!";
+
+            processer_log("볼!");
 
             setTimeout(processer_ball() , 2000);
         }
@@ -321,12 +388,18 @@ function processer_out(){
             setTimeout(function(){
                 resultDisplay_1.innerHTML = "COMPUTER의 삼진아웃!"
                 resultDisplay_2.innerHTML = "공수교대"
+
+                processer_log("COMPUTER의 삼진아웃!");
+                processer_log("공수교대");
             } , 2000);
         }
         if(nowTurn == "player"){
             setTimeout(function(){
                 resultDisplay_1.innerHTML = "PLAYER의 삼진아웃!"
                 resultDisplay_2.innerHTML = "공수교대"
+
+                processer_log("PLAYER의 삼진아웃!");
+                processer_log("공수교대");
             } , 2000);
         }
 
@@ -438,10 +511,14 @@ function processer_strike(){
         if(nowTurn == "computer"){
             resultDisplay_1.innerHTML = "COMPUTER의 삼진아웃!"
             resultDisplay_2.innerHTML = "..."
+
+            processer_log("COMPUTER의 삼진아웃!");
         }
         if(nowTurn == "player"){
             resultDisplay_1.innerHTML = "PLAYER의 삼진아웃!"
             resultDisplay_2.innerHTML = "..."
+
+            processer_log("PLAYER의 삼진아웃!");
         }
 
         processer_out();
@@ -461,10 +538,16 @@ function processer_ball(){
         if(nowTurn == "computer"){
             resultDisplay_1.innerHTML = "COMPUTER의 포볼!"
             resultDisplay_2.innerHTML = "타자가 진루합니다."
+
+            processer_log("COMPUTER의 포볼!");
+            processer_log("타자가 진루합니다.");
         }
         if(nowTurn == "player"){
             resultDisplay_1.innerHTML = "PLAYER의 포볼!"
             resultDisplay_2.innerHTML = "타자가 진루합니다."
+
+            processer_log("PLAYER의 포볼!");
+            processer_log("타자가 진루합니다.");
         }
 
         processer_goBase();
@@ -474,8 +557,9 @@ function processer_ball(){
 //로그 남기기
 function processer_log(a){
     let newP = document.createElement("p");
-    newP.innerHTML = a;
-    logDisplay.appendChild(newP);
+    newP.innerHTML = count_log + ". " + a;
+    logDisplay.prepend(newP);
+    count_log++;
 }
 
 // 현재 상황 출력
@@ -542,7 +626,7 @@ function resultPrinter(){
     sum_playerScore = 0;
 
     let scoreBoard_comScore = document.querySelector("#scoreBoard_comScore");
-    let scoreBoard_playerScore = document.querySelector("#scoreBoard_plyaerScore");
+    let scoreBoard_playerScore = document.querySelector("#scoreBoard_playerScore");
     
     if(nowTurn == "computer"){
         for(i = 1; i <= count_turn; i++){
@@ -553,7 +637,7 @@ function resultPrinter(){
     } else if(nowTurn == "player"){
         for(i = 1; i <= count_turn; i++){
             scoreBoard_playerScore.children[i].innerHTML = score_player[i - 1];
-            sum_plyaerScore += score_player[i - 1];
+            sum_playerScore += score_player[i - 1];
         }
         scoreBoard_playerScore.children[10].innerHTML = sum_playerScore;
     }
