@@ -161,7 +161,7 @@ function result_throw_curve(){
     button_1.removeEventListener("click" , result_throw_fastball);
     button_2.removeEventListener("click" , result_throw_curve);
 
-    setTimeout(computerSelect_swing() , 2000);
+    setTimeout(computerSelect_swing , 2000);
 }
 
 // 플레이어가 스윙 선택시
@@ -173,6 +173,11 @@ function result_swing_swing(){
 
     button_1.removeEventListener("click" , result_swing_swing);
     button_2.removeEventListener("click" , result_swing_noswing);
+
+    resultDisplay_1.innerHTML = "PLAYER의 스윙!"
+    resultDisplay_2.innerHTML = "..."
+
+    processer_log("PLAYER의 스윙!");
 
     setTimeout(processer_swing , 2000);
 }
@@ -186,6 +191,11 @@ function result_swing_noswing(){
 
     button_1.removeEventListener("click" , result_swing_swing);
     button_2.removeEventListener("click" , result_swing_noswing);
+
+    resultDisplay_1.innerHTML = "PLAYER가 공을 흘립니다."
+    resultDisplay_2.innerHTML = "..."
+
+    processer_log("PLAYER가 공을 흘립니다.");
 
     setTimeout(processer_swing , 2000);
 }
@@ -385,29 +395,25 @@ function processer_out(){
         } , 2000);
     } else if(count_out == 3){
         if(nowTurn == "computer"){
-            setTimeout(function(){
                 resultDisplay_1.innerHTML = "COMPUTER의 삼진아웃!"
                 resultDisplay_2.innerHTML = "공수교대"
 
                 processer_log("COMPUTER의 삼진아웃!");
                 processer_log("공수교대");
-            } , 2000);
         }
         if(nowTurn == "player"){
-            setTimeout(function(){
                 resultDisplay_1.innerHTML = "PLAYER의 삼진아웃!"
                 resultDisplay_2.innerHTML = "공수교대"
 
                 processer_log("PLAYER의 삼진아웃!");
                 processer_log("공수교대");
-            } , 2000);
         }
 
         count_out = 0;
         
         setTimeout(function(){
-            turnChanger();
-            resultPrinter();
+            turnChanger;
+            resultPrinter;
         } , 2000);
     }
 }
@@ -421,14 +427,14 @@ function processer_goBase(){
         }
     }
 
-    if(bases[4] == 1){
+    if(bases[3] == 1){
         if(nowTurn == "computer"){
             score_computer[count_turn - 1]++;
         }
         if(nowTurn == "player"){
             score_player[count_turn - 1]++;
         }
-        bases[4] = 0;
+        bases[3] = 0;
     }
 
     count_ball = 0;
@@ -450,14 +456,14 @@ function processer_goBase2(){
             }
         }
     
-        if(bases[4] == 1){
+        if(bases[3] == 1){
             if(nowTurn == "computer"){
                 score_computer[count_turn - 1]++;
             }
             if(nowTurn == "player"){
                 score_player[count_turn - 1]++;
             }
-            bases[4] = 0;
+            bases[3] = 0;
         }
     }
 
